@@ -12,11 +12,27 @@ const address2Key = new Buffer.from('704107bedff8bb1c53f7957ead59c8e78eca7a7d4d6
 
 
 //balance address 1
-web3.eth.getBalance(address1, (err, _balance) =>{
+web3.eth.getBalance(address1, (err, _balance) => {
 	console.log("Balance address1: " + web3.utils.fromWei(_balance, "ether"))
 })
 
 //balance address 2
-web3.eth.getBalance(address2, (err, _balance) =>{
+web3.eth.getBalance(address2, (err, _balance) => {
 	console.log("Balance address2: " + web3.utils.fromWei(_balance, "ether"))
 })
+
+
+//get address trx count & send signed trx 
+web3.eth.getTransactionCount(address2, (err, _txCount) => {
+
+	// trx object
+	let rawTx = {
+		nonce: web3.utils.toHex(_txCount) ,
+		gasPrice: web3.utils.toHex(web3.utils.toWei('2', "gwei")),
+		gasLimit: web3.utils.toHex(21000),
+		to: address1,
+		value: Web3.utils.toHex(web3.utils.toWei("0.1", "ether")),
+		//data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
+	}
+})
+
