@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+//Send signed transaction with Web3 and Ethereumjs-tx
+
 const Web3 = require('web3')
 const EthereumTx = require('ethereumjs-tx').Transaction
 
