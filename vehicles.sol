@@ -1,6 +1,6 @@
-pragma solidity 0.8.1;
+pragma solidity 0.8.0;
 
-contract Vehicle {
+contract Vehicles {
 	address owner;
 	uint256[] private ids;
 	mapping (address => Vehicle) private vehicles;
@@ -18,12 +18,11 @@ contract Vehicle {
 		_;
 	}
 
-	constructor(uint256 _price) public {
+	constructor() {
 		owner = msg.sender;
-		price = _price;
 	}
 
-	function addVehicle( uint256 _id, string memory _brand, uint256 _horses, uint32 _kilometers) public filterPrice(msg.value) payable {
+	function addVehicle( uint256 _id, string memory _brand, uint32 _horses, uint32 _kilometers) public filterPrice(msg.value) payable {
 		ids.push(_id);
 		vehicles[msg.sender].id = _id;
 		vehicles[msg.sender].brand = _brand;
