@@ -16,6 +16,7 @@ web3.eth.getBalance(address1, (err, _balance) => {
 	console.log("Balance address1: " + web3.utils.fromWei(_balance, "ether"))
 })
 
+
 //balance address 2
 web3.eth.getBalance(address2, (err, _balance) => {
 	console.log("Balance address2: " + web3.utils.fromWei(_balance, "ether"))
@@ -34,5 +35,16 @@ web3.eth.getTransactionCount(address2, (err, _txCount) => {
 		value: Web3.utils.toHex(web3.utils.toWei("0.1", "ether")),
 		//data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
 	}
+
+	const tx = new EthereumTx(rawTx);
+	tx.sign(address2Key);
+
+	const serializedTx = tx.serialize().toString('hex');
+
+	console.log(" ")
+	console.log("serialized trx")
+	console.log(serializedTx);
+
+	web3.eth.sendSignedTransaction('0x' + serializedTx).on('receipt', console.log);
 })
 
